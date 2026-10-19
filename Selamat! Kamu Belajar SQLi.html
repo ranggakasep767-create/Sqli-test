@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Selamat!</title>
+<style>
+:root{
+  --bg:#f4f6f5; --text:#10151a;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){ color-scheme: dark; --bg:#05080a; --text:#2ee88a; }
+}
+:root[data-theme="dark"]{ color-scheme: dark; --bg:#05080a; --text:#2ee88a; }
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  display:flex; align-items:center; justify-content:center;
+  font-family:'SFMono-Regular',Consolas,'Liberation Mono',Menlo,monospace;
+  text-align:center; padding:24px;
+}
+#msg{
+  font-size:clamp(1.2rem, 5vw, 2.4rem);
+  font-weight:700; letter-spacing:1px;
+  opacity:0;
+  transition:opacity 2.5s ease-in;
+}
+#msg.show{opacity:1;}
+.cursor{display:inline-block; width:0.5ch; animation:blink 1s step-end infinite;}
+@keyframes blink{50%{opacity:0;}}
+</style>
+</head>
+<body>
+  <div id="msg"><span id="typed"></span><span class="cursor">|</span></div>
+<script>
+const text = "SELAMAT! KAMU BELAJAR SQLI!";
+const el = document.getElementById('msg');
+const typedEl = document.getElementById('typed');
+
+setTimeout(() => {
+  el.classList.add('show');
+  let i = 0;
+  const interval = setInterval(() => {
+    typedEl.textContent += text[i];
+    i++;
+    if (i >= text.length) clearInterval(interval);
+  }, 80);
+}, 1200);
+</script>
+</body>
+</html>
